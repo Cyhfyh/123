@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baidu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #333; /* 默认深色背景 */
+            color: #fff; /* 默认文本颜色 */
+        }
+        .container {
+            margin-top: 25vh; /* 将容器上移，位于整体页面高度的三分之二位置 */
+        }
+        h1, input[type="text"], button {
+            margin-bottom: 10px;
+        }
+        input[type="text"], button {
+            padding: 12px;
+            font-size: 16px;
+            vertical-align: middle;
+            color: #fff; /* 默认按钮和输入框文本颜色 */
+            background-color: #555; /* 默认按钮和输入框背景色 */
+            border: none; /* 移除边框 */
+            border-radius: 5px; /* 添加圆角 */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
+        }
+        input[type="text"] {
+            width: 300px;
+        }
+        button {
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+        button:active {
+            transform: translateY(2px); /* 按钮按下时向下移动2px */
+        }
+        #toggleButton {
+            position: fixed;
+            bottom: 10px;
+            left: 10px; /* 调整位置到左下角 */
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none; /* 移除背景 */
+            border: none; /* 移除边框 */
+            color: #fff; /* 文本颜色 */
+            transition: transform 0.3s ease; /* 添加过渡效果 */
+            cursor: pointer; /* 鼠标指针变为手指形状 */
+        }
+        #toggleButton:hover {
+            transform: scale(1.1); /* 悬停时放大图标 */
+        }
+        #toggleButton:focus {
+            outline: none; /* 移除焦点样式 */
+        }
+        #alertButton {
+            position: fixed;
+            bottom: 10px;
+            right: 10px; /* 调整位置到右下角 */
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff; /* 文本颜色 */
+            transition: transform 0.3s ease; /* 添加过渡效果 */
+            cursor: pointer; /* 鼠标指针变为手指形状 */
+        }
+        #alertButton:hover {
+            transform: scale(1.1); /* 悬停时放大图标 */
+        }
+        #alertButton:focus {
+            outline: none; /* 移除焦点样式 */
+        }
+        /* 浅色模式下的样式 */
+        body.light-mode {
+            background-color: #f0f0f0; /* 浅色背景 */
+            color: #333; /* 文本颜色变为黑色 */
+        }
+        body.light-mode input[type="text"], body.light-mode button {
+            color: #333; /* 输入框和按钮文本颜色变为黑色 */
+            background-color: #fff; /* 输入框和按钮背景色变为白色 */
+        }
+    </style>
+    <script>
+        function searchOnBaidu() {
+            var searchText = document.getElementById('searchText').value;
+            var searchUrl = 'https://www.baidu.com/s?wd=' + encodeURIComponent(searchText);
+            window.open(searchUrl, '_blank');
+        }
+
+        function toggleBackground() {
+            var body = document.body;
+            body.classList.toggle('light-mode');
+            var toggleButton = document.getElementById('toggleButton');
+            toggleButton.textContent = body.classList.contains('light-mode') ? '☀️' : '🌙';
+        }
+
+        // 弹出提示框函数
+        function showAlert(message) {
+            alert(message);
+        }
+
+        // 回车键搜索事件
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                searchOnBaidu();
+            }
+        });
+
+        // 在页面加载时检查当前模式并设置切换按钮的图标
+        document.addEventListener('DOMContentLoaded', function() {
+            var body = document.body;
+            var toggleButton = document.getElementById('toggleButton');
+            toggleButton.textContent = body.classList.contains('light-mode') ? '☀️' : '🌙';
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>爸爸请百度</h1>
+        <input type="text" id="searchText" placeholder="输入搜索词">
+        <button onclick="searchOnBaidu()">搜索</button>
+    </div>
+    <!-- 弹出提示框按钮 -->
+    <div id="alertButton" onclick="showAlert('黄奕超专用网站')">❗</div>
+    <!-- 切换背景颜色按钮 -->
+    <div id="toggleButton" onclick="toggleBackground()">🌙</div>
+    <script>
+        // 设置默认为深色模式
+        document.body.classList.remove('light-mode');
+    </script>
+</body>
+</html>
